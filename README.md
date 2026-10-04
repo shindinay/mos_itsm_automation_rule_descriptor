@@ -1,0 +1,1 @@
+# mos_itsm_automation_rule_descriptor
