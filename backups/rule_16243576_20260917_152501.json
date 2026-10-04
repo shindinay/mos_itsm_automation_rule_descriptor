@@ -1,0 +1,21 @@
+{
+  "actions": "action1: add last_added_note_person to watches",
+  "actions_html": "action1: add last_added_note_person to watches",
+  "app_instance_id": null,
+  "condition": "true",
+  "created_at": "2026-09-17T15:23:48+03:00",
+  "description": null,
+  "description_html": "",
+  "disabled": false,
+  "expressions": "last_added_note_person: notes[last].person",
+  "generic": "request",
+  "id": 16243576,
+  "name": "[Запрос] Добавление заданных лиц в наблюдатели запросов (при обновлении)",
+  "picture_uri": null,
+  "position": 437,
+  "source": "4me",
+  "sourceID": null,
+  "trigger": "on note added",
+  "updated_at": "2026-09-17T15:23:48+03:00",
+  "nodeID": "aXRzbS1xYS5tb3MucnUvQXV0b21hdGlvblJ1bGUvMTYyNDM1NzY"
+}

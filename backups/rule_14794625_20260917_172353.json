@@ -1,0 +1,26 @@
+{
+  "actions": "action1: update task_to_update set status = canceled\naction2: update task_to_update add note 'Согласование не требуется, так как инициатор запроса {{initiator_name}} является владельцем услуги или менеджером изменения.'\naction3: update wf_task set team = deployment_team\naction4: update wf_task set member = team_member\naction5: update wf_task set status = assigned\naction6: update wf_task set start_at = cf_start_unavailability\naction14: update wf_task set planned_duration = cf_duration\naction8: update wf_task set planned_effort = cf_effort\naction9: update wf_task set impact = cf_impact\naction10: update update_task_notify_1 set status = canceled\naction11: update update_task_notify_1 add note 'Оповещение клиентов не требуется.'\naction12: update update_task_notify_2 set status = canceled\naction13: update update_task_notify_2 add note 'Оповещение клиентов не требуется.'",
+  "actions_html": "action1: update task_to_update set status = canceled\naction2: update task_to_update add note '<p>Согласование не требуется, так как инициатор запроса {{initiator_name}} является владельцем услуги или менеджером изменения.</p>'\naction3: update wf_task set team = deployment_team\naction4: update wf_task set member = team_member\naction5: update wf_task set status = assigned\naction6: update wf_task set start_at = cf_start_unavailability\naction14: update wf_task set planned_duration = cf_duration\naction8: update wf_task set planned_effort = cf_effort\naction9: update wf_task set impact = cf_impact\naction10: update update_task_notify_1 set status = canceled\naction11: update update_task_notify_1 add note '<p>Оповещение клиентов не требуется.</p>'\naction12: update update_task_notify_2 set status = canceled\naction13: update update_task_notify_2 add note '<p>Оповещение клиентов не требуется.</p>'",
+  "app_instance_id": null,
+  "condition": "req_by_in_massive",
+  "created_at": "2026-05-21T12:06:48+03:00",
+  "description": null,
+  "description_html": "",
+  "disabled": false,
+  "expressions": "req: workflow.requests[first]\ncis_owner_id: find(ci,req.custom_fields.cis).service.service_owner.id\nipar_owner_id: find(ci,req.custom_fields.ipar).service.service_owner.id\nglobal_dict_owner_id: find(ci,req.custom_fields.global_dict).service.service_owner.id\npackage_ci_owner_id: find(ci,req.custom_fields.package_ci).service.service_owner.id\nci_global_owner_id: find(ci,req.custom_fields.ci_global).service.service_owner.id\ncis_manager_id: find(ci,req.custom_fields.cis).service.change_manager.id\nipar_manager_id: find(ci,req.custom_fields.ipar).service.change_manager.id\nglobal_dict_manager_id: find(ci,req.custom_fields.global_dict).service.change_manager.id\npackage_ci_manager_id: find(ci,req.custom_fields.package_ci).service.change_manager.id\nci_global_manager_id: find(ci,req.custom_fields.ci_global).service.change_manager.id\ncis_owner: find_all(person,cis_owner_id)\nipar_owner: find_all(person,ipar_owner_id)\nglobal_dict_owner: find_all(person,global_dict_owner_id)\npackage_ci_owner: find_all(person,package_ci_owner_id)\nci_global_owner: find_all(person,ci_global_owner_id)\ncis_manager: find_all(person,cis_manager_id)\nipar_manager: find_all(person,ipar_manager_id)\nglobal_dict_manager: find_all(person,global_dict_manager_id)\npackage_ci_manager: find_all(person,package_ci_manager_id)\nci_global_manager: find_all(person,ci_global_manager_id)\nall_persons: cis_owner + ipar_owner + global_dict_owner + package_ci_owner + ci_global_owner + cis_manager + ipar_manager + global_dict_manager + package_ci_manager + ci_global_manager\nall_persons_no_dis: all_persons.select(disabled = false).select(account = \"moscow\")\nreq_by_id: req.requested_by.id\ninitiator_name: req.requested_by.name\nappr_task: successors[first]\nno_task: find(task, 0)\nreq_by_in_massive: all_persons_no_dis.any?(id = req_by_id)\ntask_to_update: req_by_in_massive ? appr_task : no_task\ndeployment_team: find(team,req.custom_fields.deployment_team)\nteam_member: find(person,req.custom_fields.team_member)\nwf_task: workflow.tasks[#9766]\ncf_start_unavailability: req.custom_fields.planned_release_date_time\ncf_duration: req.custom_fields.duration\ncf_effort: req.custom_fields.effort\ncf_impact: req.custom_fields.impact\nnotify_client_false: req.custom_fields.notify_client = false\ntask_notify_1: workflow.tasks[#10862]\ntask_notify_2: workflow.tasks[#33035]\nupdate_task_notify_1: notify_client_false ? task_notify_1 : no_task\nupdate_task_notify_2: notify_client_false ? task_notify_2 : no_task",
+  "generic": false,
+  "id": 14794625,
+  "name": "Отмена задачи план. изменения, если иниц. = влад. услуги/мен. изм.",
+  "picture_uri": null,
+  "position": 1,
+  "source": "4me",
+  "sourceID": null,
+  "trigger": "after delay",
+  "updated_at": "2026-08-27T10:42:51+03:00",
+  "nodeID": "aXRzbS1xYS5tb3MucnUvQXV0b21hdGlvblJ1bGUvMTQ3OTQ2MjU",
+  "task_template": {
+    "id": 32940,
+    "subject": "Авто-подготовка РП. МосИТСМ. Внесение изменений в продуктивную среду",
+    "nodeID": "aXRzbS1xYS5tb3MucnUvVGFza1RlbXBsYXRlLzMyOTQw"
+  }
+}

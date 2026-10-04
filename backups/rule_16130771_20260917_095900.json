@@ -1,0 +1,26 @@
+{
+  "actions": "action1: set required_approvals = in_office_count\naction2: add note 'Скорректировано количество согласующих в связи с периодами вне офиса.'",
+  "actions_html": "action1: set required_approvals = in_office_count\naction2: add note '<p>Скорректировано количество согласующих в связи с периодами вне офиса.</p>'",
+  "app_instance_id": null,
+  "condition": "status and category and not_enough_approvals and out_of_office_count",
+  "created_at": "2026-09-08T14:57:35+03:00",
+  "description": "**Контекст применения:**\n<c #062341>В задаче согласования хотя бы один согласующий находится вне офиса, и количество активных согласующих (без статуса «Вне офиса») меньше требуемого количества согласований.</c>\n\n**Итог:**\nВ задаче утверждения автоматически будет уменьшено количество согласований на 1. Это позволит, например, замещающему сотруднику согласовать задачу и за себя, и за отсутствующего коллегу, не блокируя процесс ожиданием голоса человека в отпуске.\n\n**Особенность**\nАвтоматизация позволяет работать только если есть делегаты. Если убрать это условие, то автоматизация будет применяться ко всем задачам, где согласующих меньше чем требуемых согласований",
+  "description_html": "<p><strong>Контекст применения:</strong><br />\n<span style=\"color:#062341;background-color:inherit\">В задаче согласования хотя бы один согласующий находится вне офиса, и количество активных согласующих (без статуса «Вне офиса») меньше требуемого количества согласований.</span></p>\n<p><br /></p>\n<p><strong>Итог:</strong><br />\nВ задаче утверждения автоматически будет уменьшено количество согласований на 1. Это позволит, например, замещающему сотруднику согласовать задачу и за себя, и за отсутствующего коллегу, не блокируя процесс ожиданием голоса человека в отпуске.</p>\n<p><br /></p>\n<p><strong>Особенность</strong><br />\nАвтоматизация позволяет работать только если есть делегаты. Если убрать это условие, то автоматизация будет применяться ко всем задачам, где согласующих меньше чем требуемых согласований</p>",
+  "disabled": false,
+  "expressions": "status: status = assigned\ncategory: category = approval\nout_of_office_count: approvals.map(approver.open_out_of_office_periods[first]).select(start_at < now).count\nin_office_count: approvals.count - out_of_office_count\nnot_enough_approvals: required_approvals > in_office_count",
+  "generic": false,
+  "id": 16130771,
+  "name": "[Задача][Запрос] Завершить РП и Запрос при не согласовании",
+  "picture_uri": null,
+  "position": 8,
+  "source": "4me",
+  "sourceID": null,
+  "trigger": "on status update",
+  "updated_at": "2026-09-08T14:57:35+03:00",
+  "nodeID": "aXRzbS1xYS5tb3MucnUvQXV0b21hdGlvblJ1bGUvMTYxMzA3NzE",
+  "task_template": {
+    "id": 34213,
+    "subject": "ШАБЛОН ЗАДАЧИ (АДМИНИСТРАТИВНЫЙ)",
+    "nodeID": "aXRzbS1xYS5tb3MucnUvVGFza1RlbXBsYXRlLzM0MjEz"
+  }
+}

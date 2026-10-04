@@ -1,0 +1,35 @@
+{
+  "actions": "action1: update task_to_update set custom_fields.delivery_date = new_date\naction2: update task_to_update add note '**<c #ff0000>Внимание!</c>**<c #ff0000> </c>\n\nАтрибуты Запроса обновлены.\n\nСтарое значение:{{prev_delivery_date}}.\nНовое значение: {{new_date}}.\n\nКомментарий:\n__{{req_note_last}}__'",
+  "actions_html": "action1: update task_to_update set custom_fields.delivery_date = new_date\naction2: update task_to_update add note '<p><strong><span style=\"color:#ff0000;background-color:inherit\">Внимание!</span></strong><span style=\"color:#ff0000;background-color:inherit\"> </span></p>\n<p><br /></p>\n<p>Атрибуты Запроса обновлены.</p>\n<p><br /></p>\n<p>Старое значение:{{prev_delivery_date}}.<br />\nНовое значение: {{new_date}}.</p>\n<p><br /></p>\n<p>Комментарий:<br />\n<em>{{req_note_last}}</em></p>'",
+  "app_instance_id": null,
+  "condition": "is_cf_was_not_empty and has_wf and new_date",
+  "created_at": "2026-09-21T18:57:32+03:00",
+  "description": "Автоматическая синхронизация заданного кастомного поля Запроса и Задачи",
+  "description_html": "<p>Автоматическая синхронизация заданного кастомного поля Запроса и Задачи</p>",
+  "disabled": false,
+  "expressions": "is_cf_change: custom_fields.delivery_date != custom_fields_was.delivery_date\nis_cf_was_not_empty: custom_fields_was.delivery_date != empty\nnew_date: custom_fields.delivery_date\nhas_wf: workflow != null\ntask_to_update: workflow.tasks.select(template.id = \"00000\")[first]\nreq_note_last: notes.select(medium = default)[last]\nprev_delivery_date: custom_fields_was.delivery_date",
+  "generic": false,
+  "id": 16292920,
+  "name": "[Запрос] Синхронизация значения кастомного поля Запроса и Задачи",
+  "picture_uri": null,
+  "position": 22,
+  "source": "4me",
+  "sourceID": null,
+  "trigger": "on custom_fields update",
+  "updated_at": "2026-09-21T18:57:32+03:00",
+  "account": {
+    "id": "community",
+    "name": "Сообщество МосИТСМ"
+  },
+  "nodeID": "aXRzbS1xYS5tb3MucnUvQXV0b21hdGlvblJ1bGUvMTYyOTI5MjA",
+  "request_template": {
+    "id": 72304,
+    "subject": "ШАБЛОН ЗАПРОСА (АДМИНИСТРАТИВНЫЙ)",
+    "account": {
+      "id": "community",
+      "name": "Сообщество МосИТСМ"
+    },
+    "localized_subject": "ШАБЛОН ЗАПРОСА (АДМИНИСТРАТИВНЫЙ)",
+    "nodeID": "aXRzbS1xYS5tb3MucnUvUmVxdWVzdFRlbXBsYXRlLzcyMzA0"
+  }
+}

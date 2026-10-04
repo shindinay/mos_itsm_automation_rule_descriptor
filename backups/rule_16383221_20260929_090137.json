@@ -1,0 +1,25 @@
+{
+  "actions": "action1: remove pers_to_del_from_watchers from watches",
+  "actions_html": "action1: remove pers_to_del_from_watchers from watches",
+  "app_instance_id": null,
+  "condition": "is_completed",
+  "created_at": "2026-09-29T08:54:44+03:00",
+  "description": null,
+  "description_html": "",
+  "disabled": false,
+  "expressions": "is_completed: status = completed\npers_to_del_from_watchers: find(skill_pool,00000).members",
+  "generic": "request",
+  "id": 16383221,
+  "name": "[Запрос] Удаление лиц из наблюдателей запроса (при завершении)",
+  "picture_uri": null,
+  "position": 438,
+  "source": "4me",
+  "sourceID": null,
+  "trigger": "on status update",
+  "updated_at": "2026-09-29T08:55:00+03:00",
+  "account": {
+    "id": "community",
+    "name": "Сообщество МосИТСМ"
+  },
+  "nodeID": "aXRzbS1xYS5tb3MucnUvQXV0b21hdGlvblJ1bGUvMTYzODMyMjE"
+}

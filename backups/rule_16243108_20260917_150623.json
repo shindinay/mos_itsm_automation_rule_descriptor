@@ -1,0 +1,21 @@
+{
+  "actions": "action1: add some_member to watches\naction2: add team_members to watches\naction3: add some_member to watches\naction4: add who_created to watches",
+  "actions_html": "action1: add some_member to watches\naction2: add team_members to watches\naction3: add some_member to watches\naction4: add who_created to watches",
+  "app_instance_id": null,
+  "condition": "true",
+  "created_at": "2026-09-17T15:05:11+03:00",
+  "description": "Добавление заданных лиц в наблюдатели:\n\\- из пула навыков\n\\- из заданной команды\n\\- заданную персону",
+  "description_html": "<p>Добавление заданных лиц в наблюдатели:<br />\n- из пула навыков<br />\n- из заданной команды<br />\n- заданную персону</p>",
+  "disabled": false,
+  "expressions": "skill_pool_members: find(skill_pool,000).members\nteam_members: find(team,000).members\nwho_created: created_by\nsome_member: find(person, \"example@example.com\")",
+  "generic": "request",
+  "id": 16243108,
+  "name": "[Запрос] Добавление заданных лиц в наблюдатели запросов (при создании)",
+  "picture_uri": null,
+  "position": 436,
+  "source": "4me",
+  "sourceID": null,
+  "trigger": "on create",
+  "updated_at": "2026-09-17T15:05:11+03:00",
+  "nodeID": "aXRzbS1xYS5tb3MucnUvQXV0b21hdGlvblJ1bGUvMTYyNDMxMDg"
+}

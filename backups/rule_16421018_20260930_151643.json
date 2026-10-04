@@ -1,0 +1,25 @@
+{
+  "actions": "action1: set team = return_team\naction2: set member = return_member\naction5: add note '{{@updated}}\nНе выполнена одна из следующих проверок:\n\\- при смене компонента услуги не был выбран шаблон запроса.\n\nЗапрос возвращен команде поддержки предыдущего компонента услуги.'",
+  "actions_html": "action1: set team = return_team\naction2: set member = return_member\naction5: add note '<p>{{@updated}}<br />\nНе выполнена одна из следующих проверок:<br />\n- при смене компонента услуги не был выбран шаблон запроса.</p>\n<p><br /></p>\n<p>Запрос возвращен команде поддержки предыдущего компонента услуги.</p>'",
+  "app_instance_id": null,
+  "condition": "wrong_template and not_group",
+  "created_at": "2026-09-30T14:41:19+03:00",
+  "description": null,
+  "description_html": "",
+  "disabled": false,
+  "expressions": "wrong_template: service_instance.service != template.service\nnot_group: grouping != group\nprev_service_inst: service_instance_was\nparent: service_instance.parent_service_instances[first]\ncheck_prev_si: prev_service_inst.account != rule_account\nprev_si_eligible: prev_service_inst and check_prev_si\nreturn_service_inst: prev_si_eligible ? prev_service_inst : parent\nupdated: updated_by\nprev_team: team_was\nnot_target_supp_team: team_was.account != rule_account\nsi_team: return_service_inst.support_team\ncheck_prev_team: team_was and not_target_supp_team\n_return_team: check_prev_team ? prev_team : si_team\nno_team_found: updated.teams.detect(account = return_service_inst.account)\nreturn_team: _return_team ? _return_team : no_team_found\nupdated_in_team: return_team.members.any?(id = updated.id)\nreturn_member: updated_in_team ? updated : null",
+  "generic": "request",
+  "id": 16421018,
+  "name": "[Запрос] Проверить корректность передачи в смежного поставщика",
+  "picture_uri": null,
+  "position": 439,
+  "source": "4me",
+  "sourceID": null,
+  "trigger": "on assigned to account",
+  "updated_at": "2026-09-30T14:41:19+03:00",
+  "account": {
+    "id": "community",
+    "name": "Сообщество МосИТСМ"
+  },
+  "nodeID": "aXRzbS1xYS5tb3MucnUvQXV0b21hdGlvblJ1bGUvMTY0MjEwMTg"
+}
