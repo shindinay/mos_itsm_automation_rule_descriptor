@@ -96,11 +96,11 @@ python scripts/ar_rule.py check --rule 15361146   # только вёрстка 
 - `operators_extract.txt` — справочник выражений, значений и операторов языка правил.
 - `vendor_api_automation_rules.html` — офлайн-копия документации вендора по Automation Rules API.
 - `vendor_rest_api.html`, `vendor_operators.html` — офлайн-копии смежных разделов документации.
-- Онлайн-документация: `VENDOR_DOC_URL` из `skill_env.json`.
+- Онлайн-документация: `VENDOR_DOC_URL` из `.env`.
 
 ## Техника безопасности
 
-- Перед любой записью скрипт сохраняет бэкап в `backups/rule_<id>_<дата>.json`; бэкапы не удалять.
+- Перед любой записью скрипт сохраняет бэкап в `artifacts/rule_<id>_<дата>.json`; бэкапы не удалять.
 - Не отправлять в PATCH ничего, кроме `description`; не трогать `actions`/`condition`/`expressions`.
 - Описание больше 64KB API не примет — сокращать текст.
 - Для ПРОД-среды токен должен быть явно передан пользователем или лежать в
