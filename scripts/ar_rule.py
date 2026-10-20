@@ -27,7 +27,7 @@ from datetime import datetime
 from pathlib import Path
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
-ENV_FILE = SKILL_DIR / "skill_env.json"
+ENV_FILES = (SKILL_DIR / "skill_env.json", SKILL_DIR / ".env")
 BACKUP_DIR = SKILL_DIR / "backups"
 
 # Корпоративные сертификаты не установлены в системное хранилище — работаем без проверки TLS
@@ -35,8 +35,15 @@ SSL_CTX = ssl._create_unverified_context()
 
 
 def load_env():
-    with open(ENV_FILE, encoding="utf-8") as f:
-        return json.load(f)
+    for path in ENV_FILES:
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                cfg = json.load(f)
+            # Fallback: если явного MOSITSM_ACCOUNT нет, берём из MOSITSM_DEFAULT_ACCOUNT
+            if "MOSITSM_ACCOUNT" not in cfg and "MOSITSM_DEFAULT_ACCOUNT" in cfg:
+                cfg["MOSITSM_ACCOUNT"] = cfg["MOSITSM_DEFAULT_ACCOUNT"]
+            return cfg
+    raise SystemExit(f"Не найден skill_env.json или .env в {SKILL_DIR}")
 
 
 def resolve_api_base(env_name: str, env_cfg: dict) -> str:
