@@ -187,12 +187,14 @@ def do_check(args, env_cfg):
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--env", default=None, help="QA (по умолчанию из skill_env.json) или PROD")
+    p.add_argument("--account", default=None, help="пространство X-4me-Account (иначе MOSITSM_ACCOUNT из .env)")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     for name in ("get", "set-description", "check"):
         sp = sub.add_parser(name)
         sp.add_argument("--rule", required=True, help="ID или ссылка на правило автоматизации")
         sp.add_argument("--token", default=None, help="Bearer-токен (иначе берётся из skill_env.json)")
+        sp.add_argument("--account", default=None, help="пространство X-4me-Account (иначе из .env)")
         if name == "get":
             sp.add_argument("--out", default=None, help="куда сохранить JSON (по умолчанию backups/)")
         if name == "set-description":
@@ -208,6 +210,8 @@ def main():
     env_cfg = load_env()
     if args.env is None:
         args.env = env_cfg.get("MOSITSM_STAGE", "QA")
+    if args.account:
+        env_cfg["MOSITSM_ACCOUNT"] = args.account
 
     if args.cmd == "get":
         do_get(args, env_cfg)
