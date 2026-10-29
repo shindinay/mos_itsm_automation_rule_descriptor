@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Генерация описаний для всех 34 правил автоматизации."""
+"""Генерация описаний для всех правил автоматизации из backups/."""
 import json
 import os
+from pathlib import Path
 
-RULES_DIR = r"C:\Alex\_PRJ\2_MosITSM Automation Prj\mos_itsm_automation_rule_descriptor\backups"
-DESC_DIR = r"C:\Alex\_PRJ\2_MosITSM Automation Prj\mos_itsm_automation_rule_descriptor\artifact"
+SKILL_DIR = Path(__file__).resolve().parent.parent
+RULES_DIR = SKILL_DIR / "backups"
+DESC_DIR = SKILL_DIR / "afrtifacts"
 os.makedirs(DESC_DIR, exist_ok=True)
 
 RULE_IDS = {

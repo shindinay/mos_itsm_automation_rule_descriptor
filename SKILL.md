@@ -4,7 +4,7 @@ description: Считывает правило автоматизации Мос
 ---
 # История изменений
 
-<!-- version: 1.2 — добавлен выбор выходного формата на первом шаге -->
+<!-- version: 1.3 — все конфигурационные данные читаются из .env (key=value); убраны зависимости от skill_env.json -->
 
 ## Входные данные
 - ссылка на правило автоматизации (или его ID)
@@ -22,9 +22,11 @@ description: Считывает правило автоматизации Мос
 
 Все параметры окружения — в `.env` рядом с этим файлом:
 - базовые URL API (`MOSITSM_API_URL_PROD`, `MOSITSM_API_URL_QA`),
-- аккаунт (`MOSITSM_ACCOUNT`, значение `community`),
-- токены (`MOSITSM_PERS_TOKEN_QA`, `MOSITSM_PERS_TOKEN_PROD`).
-- cреда (`MOSITSM_STAGE`).
+- аккаунт (`MOSITSM_ACCOUNT`, значение берётся из `MOSITSM_DEFAULT_ACCOUNT`),
+- токены (`MOSITSM_PERS_TOKEN_QA`, `MOSITSM_PERS_TOKEN_PROD`),
+- среда (`MOSITSM_STAGE`).
+
+Файл `skill_env.json` больше не используется. Креды бери из `.env`
 
 TLS корпоративного контура не проверяется — скрипт работает с непроверенным сертификатом.
 
@@ -47,7 +49,7 @@ python scripts/ar_rule.py check --rule 15361146   # только вёрстка 
 ```
 
 `--rule` принимает и полный URL, и числовой ID. `--token` переопределяет токен из
-`skill_env.json`. Скрипт шлёт только `PATCH {"description": ...}` — другие поля правила
+`.env`. Скрипт шлёт только `PATCH {"description": ...}` — другие поля правила
 не изменяются никогда.
 
 ## Порядок работы
